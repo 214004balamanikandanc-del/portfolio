@@ -12,3 +12,6 @@ desktop.ini
 # Temporary / Log files
 *.log
 scratch/
+
+.vercel
+.env*
