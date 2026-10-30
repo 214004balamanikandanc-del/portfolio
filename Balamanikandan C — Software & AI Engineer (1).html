@@ -601,6 +601,162 @@
             max-width: 1240px
         }
 
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .about-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .about-card-glow {
+            position: absolute;
+            inset: -15px;
+            background: radial-gradient(circle at 25% 25%, rgba(99, 102, 241, .4), transparent 55%),
+                        radial-gradient(circle at 75% 75%, rgba(236, 72, 153, .3), transparent 55%),
+                        radial-gradient(circle at 50% 95%, rgba(34, 211, 238, .25), transparent 50%);
+            filter: blur(38px);
+            border-radius: 36px;
+            opacity: .65;
+            transition: opacity .6s cubic-bezier(.16, 1, .3, 1), transform .6s cubic-bezier(.16, 1, .3, 1);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .about-card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 420px;
+            background: linear-gradient(160deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .01) 85%);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 24px;
+            padding: 14px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, .65), inset 0 1px 0 rgba(255, 255, 255, .18);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: transform .5s cubic-bezier(.16, 1, .3, 1), border-color .5s ease, box-shadow .5s ease;
+            cursor: pointer;
+        }
+
+        .about-card:hover {
+            transform: translateY(-8px) scale(1.015);
+            border-color: rgba(99, 102, 241, .5);
+            box-shadow: 0 32px 75px rgba(0, 0, 0, .8), 0 0 35px rgba(99, 102, 241, .3);
+        }
+
+        .about-card:hover .about-card-glow {
+            opacity: 1;
+            transform: scale(1.06);
+        }
+
+        .about-photo-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #090a0f;
+        }
+
+        .about-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: contrast(1.08) brightness(.98);
+            transition: transform .8s cubic-bezier(.16, 1, .3, 1), filter .8s ease;
+        }
+
+        .about-card:hover .about-photo {
+            transform: scale(1.045);
+            filter: contrast(1.15) brightness(1.02);
+        }
+
+        .about-photo-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, .88) 100%);
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 22px;
+        }
+
+        .about-photo-overlay .tagline {
+            font-family: var(--hd);
+            font-size: 1.22rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -.02em;
+            line-height: 1.2;
+            margin-bottom: 3px;
+        }
+
+        .about-photo-overlay .subtag {
+            font-family: var(--mo);
+            font-size: .68rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--soft);
+        }
+
+        .about-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 8px 4px;
+            font-family: var(--mo);
+            font-size: .74rem;
+            letter-spacing: .08em;
+            color: var(--mute);
+        }
+
+        .about-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #34d399;
+        }
+
+        .about-status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 10px #10b981;
+            animation: pulse-dot 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .4; transform: scale(.7); }
+        }
+
+        @media (max-width: 960px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            .about-visual {
+                order: -1;
+            }
+            .about-card {
+                max-width: 360px;
+            }
+        }
+
         .stats {
             display: flex;
             gap: 44px;
@@ -937,16 +1093,37 @@
         </section>
 
         <section id="about">
-            <div class="wrap"><span class="tag">About</span>
-                <h2>Engineer by training,<br><em>builder by habit.</em></h2>
-                <p>I started in Electronics &amp; Communication and moved into software, so I think about systems end to
-                    end — from sensors and circuits to models and dashboards. I focus on work that ships and that people
-                    can understand and trust.</p>
-                <div class="stats">
-                    <div><b data-n="5">0</b><span>Internships</span></div>
-                    <div><b data-n="6">0</b><span>Projects</span></div>
-                    <div><b data-n="2">0</b><span>Competition wins</span></div>
-                    <div><b data-n="2027">0</b><span>Graduating</span></div>
+            <div class="wrap">
+                <div class="about-grid">
+                    <div class="about-text">
+                        <span class="tag">About</span>
+                        <h2>Engineer by training,<br><em>builder by habit.</em></h2>
+                        <p>I started in Electronics &amp; Communication and moved into software, so I think about systems end to
+                            end — from sensors and circuits to models and dashboards. I focus on work that ships and that people
+                            can understand and trust.</p>
+                        <div class="stats">
+                            <div><b data-n="5">0</b><span>Internships</span></div>
+                            <div><b data-n="6">0</b><span>Projects</span></div>
+                            <div><b data-n="2">0</b><span>Competition wins</span></div>
+                            <div><b data-n="2027">0</b><span>Graduating</span></div>
+                        </div>
+                    </div>
+                    <div class="about-visual">
+                        <div class="about-card-glow"></div>
+                        <div class="about-card" data-cur="Balamanikandan">
+                            <div class="about-photo-wrap">
+                                <img class="about-photo" src="profile.jpg" alt="Balamanikandan C — Software &amp; AI Engineer" width="768" height="1024" loading="lazy" decoding="async">
+                                <div class="about-photo-overlay">
+                                    <div class="tagline">Balamanikandan C.</div>
+                                    <div class="subtag">Software &amp; AI Engineer</div>
+                                </div>
+                            </div>
+                            <div class="about-card-footer">
+                                <span class="about-status"><i class="about-status-dot"></i>Available for roles</span>
+                                <span>2026</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="mqs" id="mqs"></div>
